@@ -138,7 +138,28 @@ do {
                     }
                     break;
                 case 2:
-                    //
+                    echo "\n📑 CREAR NUEVO RESPONSABLE DE VIAJE \n\n" .
+                    "Ingrese el número de empleado: \n";
+                    $numEmpleado = intval(trim(fgets(STDIN)));
+                    if($numEmpleado != 0){
+                        echo "\n📑 CREAR NUEVO RESPONSABLE DE VIAJE \n\n" .
+                        "Ingrese el número de licencia: \n";
+                        $numLicencia = intval(trim(fgets(STDIN)));
+                        if($numLicencia != 0){
+                            echo "\n📑 CREAR NUEVO RESPONSABLE DE VIAJE \n\n" .
+                            "Ingrese el nombre: \n";
+                            $nombre = trim(fgets(STDIN));
+                            echo "\n📑 CREAR NUEVO RESPONSABLE DE VIAJE \n\n" .
+                            "Ingrese el apellido: \n";
+                            $apellido = trim(fgets(STDIN));
+                            $nuevoResponsable = new ResponsableV($numEmpleado, $numLicencia, $nombre, $apellido);
+                            $mardelplata->setObjResponsable($nuevoResponsable);
+                        } else {
+                            echo "\n❌ Ingresa un número distinto de 0\n";
+                        }
+                    } else {
+                        echo "\n❌ Ingresa un número distinto de 0\n";
+                    }
                     break;
                 default:
                     echo "\n❌ Opción incorrecta\n";
