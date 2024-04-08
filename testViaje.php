@@ -28,8 +28,9 @@ do {
     "4) Editar responsable del viaje \n" .
     "5) Ver pasajeros \n" .
     "6) Buscar pasajero \n" .
-    "8) Editar pasajero \n" .
-    "9) Agregar pasajero \n";
+    "7) Editar pasajero \n" .
+    "8) Agregar pasajero \n" .
+    "9) Salir \n";
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion){
@@ -180,16 +181,71 @@ do {
             }
             break;
         case 7:
-            //
+            echo "\n📑 EDITAR PASAJERO \n\n" .
+            "Ingresa el número de documento del pasajero: \n";
+            $numDocBuscar = intval(trim(fgets(STDIN)));
+            $encontrado = $mardelplata->buscarPasajero($numDocBuscar);
+            if ($encontrado){
+                echo $encontrado;
+                echo "\n📑 EDITAR PASAJERO \n\n" .
+                "1) Editar nombre \n" .
+                "2) Editar apellido \n" .
+                "3) Editar número de documento \n" .
+                "4) Editar teléfono \n";
+                $editarPasajero = trim(fgets(STDIN));
+                switch ($editarPasajero){
+                    case 1:
+                        echo "\n📑 EDITAR PASAJERO \n\n" .
+                        "Ingresa el nuevo nombre: \n";
+                        $nuevoNombre = trim(fgets(STDIN));
+                        $encontrado->setNombre($nuevoNombre);
+                        echo "\n✅ Nombre cambiado con éxito\n";
+                        break;
+                    case 2:
+                        echo "\n📑 EDITAR PASAJERO \n\n" .
+                        "Ingresa el nuevo apellido: \n";
+                        $nuevoApellido = trim(fgets(STDIN));
+                        $encontrado->setApellido($nuevoApellido);
+                        echo "\n✅ Apellido cambiado con éxito\n";
+                        break;
+                    case 3:
+                        echo "\n📑 EDITAR PASAJERO \n\n" .
+                        "Ingresa el nuevo número de documento: \n";
+                        $nuevoDocumento = intval(trim(fgets(STDIN)));
+                        if ($nuevoDocumento != 0){
+                            $encontrado->setNumDoc($nuevoDocumento);
+                            echo "\n✅ Número de documento cambiado con éxito\n";
+                        } else {
+                            echo "\n❌ Ingresa un número distinto de 0\n";
+                        }
+                        break;
+                    case 4:
+                        echo "\n📑 EDITAR PASAJERO \n\n" .
+                        "Ingresa el nuevo número de teléfono: \n";
+                        $nuevoTelefono = intval(trim(fgets(STDIN)));
+                        if ($nuevoTelefono != 0){
+                            $encontrado->setTelefono($nuevoTelefono);
+                            echo "\n✅ Número de teléfono cambiado con éxito\n";
+                        } else {
+                            echo "\n❌ Ingresa un número distinto de 0\n";
+                        }
+                        break;
+                    default:
+                    echo "\n❌ Opción incorrecta\n";
+                }
+                
+            } else {
+                echo "\n❌ Pasajero no encontrado\n";
+            }
             break;
         case 8:
             //
             break;
         case 9:
-            // Salir
+            // salir
             break;
         default:
             echo "\n❌ Opción incorrecta\n";
     }
 
-} while ($opcion != 0);
+} while ($opcion != 10);
