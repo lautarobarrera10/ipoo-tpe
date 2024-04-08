@@ -91,4 +91,21 @@ class Viaje {
         }
         return $pasajero;
     }
+
+    /**
+     * @param Pasajero $nuevoPasajero
+     * @return bool
+     */
+    public function agregarPasajero(Pasajero $nuevoPasajero){
+        $agregado = false;
+        $cantPasajeros = count($this->getColPasajeros());
+        $cantMaxima = $this->getMaximoPasajeros();
+        if ($cantPasajeros < $cantMaxima){
+            $pasajeros = $this->getColPasajeros();
+            array_push($pasajeros, $nuevoPasajero);
+            $this->setColPasajeros($pasajeros);
+            $agregado = true;
+        }
+        return $agregado;
+    }
 }

@@ -239,7 +239,40 @@ do {
             }
             break;
         case 8:
-            //
+            echo "\n📑 AGREGAR PASAJERO \n\n";
+            $cantPasajeros = count($mardelplata->getColPasajeros());
+            $cantMaxima = $mardelplata->getMaximoPasajeros();
+            if ($cantMaxima == $cantPasajeros){
+                echo "\n❌ No se pueden agregar pasajeros, la capacidad del viaje está al máximo.\n";
+            } else {
+                echo "Ingrese número de documento del nuevo pasajero: \n";
+                $docNuevoPasajero = intval(trim(fgets(STDIN)));
+                $pasajeroRepetido = $mardelplata->buscarPasajero($docNuevoPasajero);
+                if ($pasajeroRepetido){
+                    echo "\n❌ Este pasajero ya está registrado en el viaje.\n";
+                } else {
+                    echo "\n📑 AGREGAR PASAJERO \n\n" .
+                    "Ingresa el nombre: \n";
+                    $nombreNuevoPasajero = trim(fgets(STDIN));
+                    echo "\n📑 AGREGAR PASAJERO \n\n" .
+                    "Ingresa el apellido: \n";
+                    $apellidoNuevoPasajero = trim(fgets(STDIN));
+                    echo "\n📑 AGREGAR PASAJERO \n\n" .
+                    "Ingresa el número de teléfono: \n";
+                    $telefonoNuevoPasajero = intval(trim(fgets(STDIN)));
+                    if ($telefonoNuevoPasajero != 0){
+                        $nuevoPasajero = new Pasajero($nombreNuevoPasajero, $apellidoNuevoPasajero, $docNuevoPasajero, $telefonoNuevoPasajero);
+                        $agregado = $mardelplata->agregarPasajero($nuevoPasajero);
+                        if ($agregado){
+                            echo "\n✅ Pasajero agregado con éxito\n";
+                        } else {
+                            echo "\n❌ Ocurrió un problema, intentalo de nuevo.\n";
+                        }
+                    } else {
+                        echo "\n❌ Ingresa un número distinto de 0\n";
+                    }
+                }
+            }
             break;
         case 9:
             // salir
