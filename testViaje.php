@@ -20,4 +20,121 @@ $carla = new ResponsableV(1, 123456, "Carla", "Fernandez");
 
 $mardelplata = new Viaje(123, "Mar del Plata", 10, [$lautaro, $camila, $sandra], $carla);
 
-echo $mardelplata;
+do {
+    echo "\n📑 MENÚ PRINCIPAL \n\n" .
+    "1) Ver viaje \n" .
+    "2) Editar viaje \n" .
+    "3) Ver responsable del viaje \n" .
+    "4) Editar responsable del viaje \n" .
+    "5) Ver pasajeros \n" .
+    "6) Buscar pasajero \n" .
+    "7) Agregar pasajero \n";
+    "8) Editar pasajero \n";
+    $opcion = fgets(STDIN);
+
+    switch ($opcion){
+        case 1:
+            echo $mardelplata->obtenerDatosDelViaje();
+            break;
+        case 2:
+            echo "\n📑 EDITAR VIAJE \n\n" .
+            "1) Editar código \n" .
+            "2) Editar destino \n" .
+            "3) Editar máximo de pasajeros \n";
+            $editarViaje = fgets(STDIN);
+            switch ($editarViaje){
+                case 1:
+                    echo "\n📑 EDITAR CÓDIGO DE VIAJE \n\n" .
+                    "Ingrese el nuevo código: \n";
+                    $nuevoCodigo = intval(fgets(STDIN)); // intval devuelve 0 si se ingresa un string
+                    if ($nuevoCodigo != 0){
+                        $mardelplata->setCodigo($nuevoCodigo);
+                        echo "\n✅ Código cambiado con éxito\n";
+                    } else {
+                        echo "\n❌ El código sólo puede estar compuesto por números.\n";
+                    }
+                    break;
+                case 2:
+                    echo "\n📑 EDITAR DESTINO DE VIAJE \n\n" .
+                    "Ingrese el nuevo destino: \n";
+                    $nuevoDestinto = fgets(STDIN);
+                    $mardelplata->setDestino($nuevoDestinto);
+                    echo "\n✅ Destino cambiado con éxito\n";
+                    break;
+                case 3:
+                    echo "\n📑 EDITAR MÁXIMO DE PASAJEROS\n\n" .
+                    "Ingrese el nuevo máximo: \n";
+                    $nuevoMaximo = intval(fgets(STDIN)); // intval devuelve 0 si se ingresa un string
+                    if ($nuevoMaximo != 0){
+                        if ($nuevoMaximo >= count($mardelplata->getColPasajeros())){
+                            $mardelplata->setMaximoPasajeros($nuevoMaximo);
+                            echo "\n✅ Máximo de pasajeros cambiado con éxito\n";
+                        } else {
+                            echo "\n❌ El nuevo máximo no puede ser menor que los pasajeros actuales\n";
+                        }
+                    } else {
+                        echo "\n❌ Ingresa un número distinto de 0\n";
+                    }
+                    break;
+                default:
+                    echo "\n❌ Opción incorrecta\n";
+            }
+            break;
+        case 3:
+            echo $mardelplata->getObjResponsable();
+            break;
+        case 4:
+            echo "\n📑 EDITAR RESPONSABLE DE VIAJE \n\n" .
+            "1) Editar un dato del responsable actual \n" .
+            "2) Ingresar un nuevo responsable \n";
+            $editarResponsable = fgets(STDIN);
+            switch($editarResponsable){
+                case 1:
+                    echo "\n📑 EDITAR DATOS RESPONSABLE DE VIAJE \n\n" .
+                    "1) Editar número de empleado \n" .
+                    "2) Editar número de licencia \n" .
+                    "3) Editar nombre \n" .
+                    "4) Editar apellido \n";
+                    $editarDato = fgets(STDIN);
+                    switch($editarDato){
+                        case 1:
+                            echo "\n📑 EDITAR DATOS RESPONSABLE DE VIAJE \n\n" .
+                            "Ingrese el nuevo número de empleado \n";
+                            $nuevoNumeroEmpleado = intval(fgets(STDIN)); // intval devuelve 0 si se ingresa un string
+                            if ($nuevoNumeroEmpleado != 0){
+                                $mardelplata->getObjResponsable()->setNumEmpleado($nuevoNumeroEmpleado);
+                                echo "\n✅ Número de empleado cambiado con éxito\n";
+                            } else {
+                                echo "\n❌ Ingresa un número distinto de 0\n";
+                            }
+                            break;
+                        case 2:
+                            echo "\n📑 EDITAR DATOS RESPONSABLE DE VIAJE \n\n" .
+                            "Ingrese el nuevo número de licencia \n";
+                            $nuevoNumeroLicencia = intval(fgets(STDIN)); // intval devuelve 0 si se ingresa un string
+                            if ($nuevoNumeroLicencia != 0){
+                                $mardelplata->getObjResponsable()->setNumLicencia($nuevoNumeroLicencia);
+                                echo "\n✅ Número de licencia cambiado con éxito\n";
+                            } else {
+                                echo "\n❌ Ingresa un número distinto de 0\n";
+                            }
+                            break;
+                        case 3:
+                            //
+                            break;
+                        case 4:
+                            //
+                            break;
+                        default:
+                            echo "\n❌ Opción incorrecta\n";
+                    }
+                    break;
+                case 2:
+                    //
+                    break;
+                default:
+                    echo "\n❌ Opción incorrecta\n";
+            }
+    }
+
+} while ($opcion != 0);

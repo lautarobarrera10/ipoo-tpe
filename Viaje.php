@@ -67,4 +67,13 @@ class Viaje {
     public function setObjResponsable($value){
         $this->objResponsable = $value;
     }
+
+    public function obtenerDatosDelViaje(){
+        return
+        "\n✈️  Viaje" . "\n" .
+        "Código de vuelo: " . $this->getCodigo() . "\n" .
+        "Destino: " . $this->getDestino() . "\n" .
+        "Máximo de pasajeros: " . $this->getMaximoPasajeros() . "\n" .
+        "Pasajes vendidos: " . count($this->getColPasajeros()) . "\n";
+    }
 }
