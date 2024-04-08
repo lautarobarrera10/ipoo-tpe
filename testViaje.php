@@ -28,8 +28,8 @@ do {
     "4) Editar responsable del viaje \n" .
     "5) Ver pasajeros \n" .
     "6) Buscar pasajero \n" .
-    "7) Agregar pasajero \n";
-    "8) Editar pasajero \n";
+    "8) Editar pasajero \n" .
+    "9) Agregar pasajero \n";
     $opcion = trim(fgets(STDIN));
 
     switch ($opcion){
@@ -164,6 +164,32 @@ do {
                 default:
                     echo "\n❌ Opción incorrecta\n";
             }
+            break;
+        case 5:
+            echo implode("\n", $mardelplata->getColPasajeros());
+            break;
+        case 6:
+            echo "\n📑 BUSCAR PASAJERO \n\n" .
+            "Ingresa el número de documento del pasajero: \n";
+            $numDocBuscar = intval(trim(fgets(STDIN)));
+            $encontrado = $mardelplata->buscarPasajero($numDocBuscar);
+            if ($encontrado){
+                echo $encontrado;
+            } else {
+                echo "\n❌ Pasajero no encontrado\n";
+            }
+            break;
+        case 7:
+            //
+            break;
+        case 8:
+            //
+            break;
+        case 9:
+            // Salir
+            break;
+        default:
+            echo "\n❌ Opción incorrecta\n";
     }
 
 } while ($opcion != 0);

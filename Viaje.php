@@ -76,4 +76,19 @@ class Viaje {
         "Máximo de pasajeros: " . $this->getMaximoPasajeros() . "\n" .
         "Pasajes vendidos: " . count($this->getColPasajeros()) . "\n";
     }
+
+    /**
+     * @param int $numDocumento
+     * @return Pasajero
+     */
+    public function buscarPasajero( Int $numDocumento ){
+        $pasajero = null;
+        $pasajeros = $this->getColPasajeros();
+        for ($i=0; $i < count($pasajeros); $i++) { 
+            if ($pasajeros[$i]->getNumDoc() == $numDocumento){
+                $pasajero = $pasajeros[$i];
+            }
+        }
+        return $pasajero;
+    }
 }
